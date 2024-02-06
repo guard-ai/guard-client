@@ -1,9 +1,11 @@
-# Expo Router and Tailwind CSS
+# Guard Client
 
-Use [Expo Router](https://docs.expo.dev/router/introduction/) with [Nativewind](https://www.nativewind.dev/v4/overview/) styling.
+## Setup
 
-## 🚀 How to use
+[Install bun](https://bun.sh/docs/installation)
+
+## 🚀 How to install
 
 ```sh
-npx create-expo-app -e with-router-tailwind
+bun install
 ```
