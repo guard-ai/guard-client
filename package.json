@@ -9,11 +9,15 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo-google-fonts/oswald": "^0.2.3",
     "@gorhom/bottom-sheet": "^4.6.1",
     "eas-cli": "^7.3.0",
     "expo": "~50.0.7",
+    "expo-app-loading": "^2.1.1",
     "expo-constants": "~15.4.5",
     "expo-device": "~5.9.3",
+    "expo-font": "~11.10.3",
+    "expo-image": "~1.10.6",
     "expo-linking": "~6.2.1",
     "expo-location": "~16.5.5",
     "expo-notifications": "~0.27.6",
