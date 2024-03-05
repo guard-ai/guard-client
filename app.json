@@ -7,6 +7,10 @@
       "output": "static",
       "bundler": "metro"
     },
+    "android": {
+      "package": "com.guard.app",
+      "googleServicesFile": "./google-services.json"
+    },
     "plugins": [
       [
         "expo-router",
@@ -16,6 +20,18 @@
       ]
     ],
     "name": "guard-client",
-    "slug": "guard-client"
+    "slug": "guard-client",
+    "extra": {
+      "router": {
+        "origin": "https://n"
+      },
+      "eas": {
+        "projectId": "51c1823c-c779-479c-9021-eea49c72ea09"
+      }
+    },
+    "owner": "guard-group",
+    "ios": {
+      "bundleIdentifier": "com.guard.app"
+    }
   }
 }
