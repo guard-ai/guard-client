@@ -97,7 +97,6 @@ export default function MapPage() {
             <MapView
                 style={styles.map}
                 region={mapRegion}
-                provider="google"
                 showsUserLocation
             ></MapView>
 

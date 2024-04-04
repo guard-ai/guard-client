@@ -98,7 +98,6 @@ export default function FriendsPage() {
             <MapView
                 style={styles.map}
                 region={mapRegion}
-                provider="google"
                 showsUserLocation
             ></MapView>
 
