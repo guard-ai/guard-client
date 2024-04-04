@@ -1,12 +1,42 @@
-import React from "react";
-import "../global.css";
-import { Slot } from "expo-router";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import React, { useContext, useEffect, useState } from 'react';
+import '../global.css';
+import { Redirect, Slot } from 'expo-router';
+import { Stack } from 'expo-router/stack';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import AuthContext from './context';
+import { supabase, getUser } from '@/lib/supabase';
+import { View, Text } from 'react-native';
+import { AuthChangeEvent, Session } from '@supabase/supabase-js';
+import { router } from 'expo-router';
 
 export default function Layout() {
-	return (
-		<GestureHandlerRootView className="w-full h-full flex-1">
-			<Slot />
-		</GestureHandlerRootView>
-	);
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        supabase.auth.onAuthStateChange(
+            (event: AuthChangeEvent, session: Session) => {
+                if (session) {
+                    setUser(session.user);
+                    router.replace('/');
+                } else {
+                    setUser(null);
+                    router.replace('/signup');
+                }
+                console.log('changing auth state to', session);
+            }
+        );
+    }, []);
+
+    return (
+        <AuthContext.Provider value={{ user, setUser }}>
+            <GestureHandlerRootView className="w-full h-full flex-1">
+                <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen
+                        name="(tabs)"
+                        options={{ headerShown: false }}
+                    />
+                </Stack>
+            </GestureHandlerRootView>
+        </AuthContext.Provider>
+    );
 }
