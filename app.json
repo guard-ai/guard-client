@@ -18,7 +18,7 @@
           "origin": "https://n"
         }
       ],
-      "expo-font",
+      "expo-font"
     ],
     "name": "guard-client",
     "slug": "guard-client",
@@ -30,6 +30,9 @@
         "projectId": "51c1823c-c779-479c-9021-eea49c72ea09"
       }
     },
-    "owner": "guard-group"
+    "owner": "guard-group",
+    "ios": {
+      "bundleIdentifier": "com.guard.app"
+    }
   }
 }

@@ -1,8 +1,7 @@
 import { supabase } from '@/lib/supabase';
-import { Link, router } from 'expo-router';
-import React, { useContext, useState } from 'react';
-import { View, Text, Button, TextInput, Pressable } from 'react-native';
-import AuthContext from './context';
+import { router } from 'expo-router';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Pressable } from 'react-native';
 
 export default function SignUp() {
     const [err, setErr] = useState('');

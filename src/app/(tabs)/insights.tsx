@@ -11,12 +11,8 @@ import { StyleSheet, View } from 'react-native';
 import * as Location from 'expo-location';
 import { Accuracy } from 'expo-location';
 import '../../global.css';
-import BottomSheet, {
-    BottomSheetFooter,
-    BottomSheetFlatList
-} from '@gorhom/bottom-sheet';
-import { BottomSheetDefaultFooterProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetFooter/types';
-import { EventI, Event } from '@/components/map';
+import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import { Event } from '@/components/map';
 import {
     useFonts,
     Oswald_200ExtraLight,

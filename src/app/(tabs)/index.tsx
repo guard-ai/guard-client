@@ -1,6 +1,5 @@
 import React, {
     useCallback,
-    useContext,
     useEffect,
     useMemo,
     useRef,
@@ -23,7 +22,6 @@ import {
     Oswald_700Bold
 } from '@expo-google-fonts/oswald';
 import { SplashScreen } from 'expo-router';
-import AuthContext from '../context';
 import { events } from '@/lib/data';
 
 export default function MapPage() {
@@ -45,7 +43,6 @@ export default function MapPage() {
     });
     const sheetRef = useRef<BottomSheet>(null);
     const snapPoints = useMemo(() => ['25%', '50%'], []);
-    const { user, setUser } = useContext(AuthContext);
     const [appIsReady, setAppIsReady] = useState(false);
     const onLayoutRootView = useCallback(async () => {
         if (appIsReady || fontsLoaded || fontError) {
@@ -107,7 +104,6 @@ export default function MapPage() {
             <MapView
                 style={styles.map}
                 region={mapRegion}
-                provider="google"
                 showsUserLocation
             ></MapView>
 

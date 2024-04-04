@@ -13,3 +13,9 @@ google-services.json
 
 # macOS
 .DS_Store
+
+ios
+android
+
+.env*
+!.env.example

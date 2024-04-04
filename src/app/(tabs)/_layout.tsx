@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Redirect, Tabs } from 'expo-router';
 import {
     FriendsIcon,
@@ -6,13 +6,11 @@ import {
     MapIcon,
     ProfilePicture
 } from '@/components/icons';
-import { View, Text } from 'react-native';
 import {
     Oswald_300Light,
     Oswald_400Regular,
     useFonts
 } from '@expo-google-fonts/oswald';
-import { getUser } from '@/lib/supabase';
 import AuthContext from '../context';
 
 export default function TabLayout() {
@@ -39,7 +37,7 @@ export default function TabLayout() {
                     fontFamily: 'Oswald_400Regular',
                     fontSize: 16
                 },
-                tabBarItemStyle: { marginTop: 15 }
+                tabBarItemStyle: { marginTop: 8 }
             }}
         >
             <Tabs.Screen

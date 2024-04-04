@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../global.css';
-import { Redirect, Slot } from 'expo-router';
 import { Stack } from 'expo-router/stack';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import AuthContext from './context';
-import { supabase, getUser } from '@/lib/supabase';
-import { View, Text } from 'react-native';
+import { supabase } from '@/lib/supabase';
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { router } from 'expo-router';
 
@@ -14,7 +12,7 @@ export default function Layout() {
 
     useEffect(() => {
         supabase.auth.onAuthStateChange(
-            (event: AuthChangeEvent, session: Session) => {
+            (_: AuthChangeEvent, session: Session) => {
                 if (session) {
                     setUser(session.user);
                     router.replace('/');

@@ -1,6 +1,5 @@
 import React, {
     useCallback,
-    useContext,
     useEffect,
     useMemo,
     useRef,
@@ -12,7 +11,7 @@ import * as Location from 'expo-location';
 import { Accuracy } from 'expo-location';
 import '../../global.css';
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
-import { FriendI, Event, FriendEntry } from '@/components/map';
+import { FriendEntry } from '@/components/map';
 import {
     useFonts,
     Oswald_200ExtraLight,
@@ -23,7 +22,6 @@ import {
     Oswald_700Bold
 } from '@expo-google-fonts/oswald';
 import { SplashScreen } from 'expo-router';
-import AuthContext from '../context';
 import { friends } from '@/lib/data';
 
 export default function FriendsPage() {
@@ -45,7 +43,6 @@ export default function FriendsPage() {
     });
     const sheetRef = useRef<BottomSheet>(null);
     const snapPoints = useMemo(() => ['25%', '50%'], []);
-    const { user, setUser } = useContext(AuthContext);
     const [appIsReady, setAppIsReady] = useState(false);
     const onLayoutRootView = useCallback(async () => {
         if (appIsReady || fontsLoaded || fontError) {
