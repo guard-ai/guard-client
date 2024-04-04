@@ -11,7 +11,7 @@ import {
 } from '@expo-google-fonts/oswald';
 
 function Chip(props: {
-    children: any;
+    children: React.ReactElement;
     category:
         | 'CONFIRMED_THREAT'
         | 'REPORTED_THREAT'
@@ -72,7 +72,7 @@ export function FriendEntry(props: { friend: FriendI }) {
         return null;
     }
 
-    let time =
+    const time =
         new Date().getTime() / 1000 -
             props.friend.recentEvent?.time.getTime() / 1000 <=
         60
@@ -108,11 +108,11 @@ export function Event(props: { event: EventI }) {
         Oswald_600SemiBold,
         Oswald_700Bold
     });
-    let time =
+    const time =
         new Date().getTime() / 1000 - props.event.time.getTime() / 1000 <= 60
             ? 'NOW'
             : `${timeSince(props.event.time)} AGO`;
-    let label = props.event.category.includes('CONFIRMED')
+    const label = props.event.category.includes('CONFIRMED')
         ? 'CONFIRMED'
         : 'REPORTED';
 
@@ -147,12 +147,12 @@ function timeSince(date: Date) {
         date = new Date(date);
     }
 
-    let seconds = Math.floor(
+    const seconds = Math.floor(
         new Date().getTime() / 1000 - date.getTime() / 1000
     );
     let intervalType = 'seconds';
 
-    var interval = Math.floor(seconds / 31536000);
+    let interval = Math.floor(seconds / 31536000);
     if (interval >= 1) {
         intervalType = 'year';
     } else {

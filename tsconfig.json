@@ -7,6 +7,6 @@
     },
     "typeRoots": ["./types"]
   },
-  "extends": "expo/tsconfig.base",
+  "extends": "./tsconfig.base",
   "include": ["global.d.ts", "**/*.ts", "**/*.tsx"]
 }

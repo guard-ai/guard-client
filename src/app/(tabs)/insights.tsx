@@ -1,11 +1,4 @@
-import React, {
-    useCallback,
-    useContext,
-    useEffect,
-    useMemo,
-    useRef,
-    useState
-} from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import MapView from 'react-native-maps';
 import { StyleSheet, View } from 'react-native';
 import * as Location from 'expo-location';
@@ -23,7 +16,6 @@ import {
     Oswald_700Bold
 } from '@expo-google-fonts/oswald';
 import { SplashScreen } from 'expo-router';
-import AuthContext from '../context';
 
 export default function MapPage() {
     const [fontsLoaded, fontError] = useFonts({
@@ -44,18 +36,17 @@ export default function MapPage() {
     });
     const sheetRef = useRef<BottomSheet>(null);
     const snapPoints = useMemo(() => ['25%', '50%'], []);
-    const { user, setUser } = useContext(AuthContext);
     const [appIsReady, setAppIsReady] = useState(false);
-    const onLayoutRootView = useCallback(async () => {
-        if (appIsReady || fontsLoaded || fontError) {
-            // This tells the splash screen to hide immediately! If we call this after
-            // `setAppIsReady`, then we may see a blank screen while the app is
-            // loading its initial state and rendering its first pixels. So instead,
-            // we hide the splash screen once we know the root view has already
-            // performed layout.
-            await SplashScreen.hideAsync();
-        }
-    }, [appIsReady, fontsLoaded, fontError]);
+    // const onLayoutRootView = useCallback(async () => {
+    //     if (appIsReady || fontsLoaded || fontError) {
+    //         // This tells the splash screen to hide immediately! If we call this after
+    //         // `setAppIsReady`, then we may see a blank screen while the app is
+    //         // loading its initial state and rendering its first pixels. So instead,
+    //         // we hide the splash screen once we know the root view has already
+    //         // performed layout.
+    //         await SplashScreen.hideAsync();
+    //     }
+    // }, [appIsReady, fontsLoaded, fontError]);
 
     useEffect(() => {
         async function prepare() {
@@ -75,13 +66,13 @@ export default function MapPage() {
     }, []);
 
     const userLocation = async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
+        const { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== 'granted') {
             console.error('Permission to access location was denied');
             setErrorMsg('Permission to access location was denied');
         }
 
-        let location = await Location.getCurrentPositionAsync({
+        const location = await Location.getCurrentPositionAsync({
             accuracy: Accuracy.High
         });
 
