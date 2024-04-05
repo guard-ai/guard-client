@@ -17,6 +17,8 @@ import {
 } from '@expo-google-fonts/oswald';
 import { SplashScreen } from 'expo-router';
 import { events } from '@/lib/data';
+import { sendPushNotification } from '@/lib/notifications';
+import * as Notifications from 'expo-notifications';
 
 export default function MapPage() {
     const [fontsLoaded, fontError] = useFonts({
@@ -87,6 +89,18 @@ export default function MapPage() {
 
     useEffect(() => {
         userLocation();
+        const sendFirstNotification = async () => {
+            const testNotification: Notifications.NotificationContent = {
+                title: 'Test Notification',
+                subtitle: 'This is a test subtitle',
+                body: 'Here is the body of a notification',
+                sound: 'default',
+                data: null
+            }
+            console.log('sending test notification')
+            await sendPushNotification(user.user_metadata.expoPushToken, testNotification);
+        };
+        sendFirstNotification()
     }, []);
 
     if (!appIsReady && !fontsLoaded && !fontError) {
