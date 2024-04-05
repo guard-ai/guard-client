@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import { EXPO_PROJECT_ID } from '@env';
+import Constants from 'expo-constants';
 
 Notifications.setNotificationHandler({
 	handleNotification: async () => ({
@@ -12,7 +13,7 @@ Notifications.setNotificationHandler({
   });
 
 export async function registerForPushNotificationsAsync() {
-    let token: string;
+    let token: string = '';
 
     if (Platform.OS === 'android') {
         await Notifications.setNotificationChannelAsync('default', {
@@ -39,7 +40,7 @@ export async function registerForPushNotificationsAsync() {
         // https://docs.expo.dev/push-notifications/push-notifications-setup/#configure-projectid
         token = (
             await Notifications.getExpoPushTokenAsync({
-                projectId: EXPO_PROJECT_ID
+                projectId: Constants.expoConfig?.extra?.eas.projectId
             })
         ).data;
         console.log(token);
@@ -55,7 +56,6 @@ export async function sendPushNotification(expoPushToken: string, notification: 
 	const message = {
 	  to: expoPushToken, ...notification
 	};
-	console.log(expoPushToken)
   
 	const resp = await fetch('https://exp.host/--/api/v2/push/send', {
 	  method: 'POST',
@@ -66,5 +66,4 @@ export async function sendPushNotification(expoPushToken: string, notification: 
 	  },
 	  body: JSON.stringify(message),
 	});
-	console.log('resp', resp.json())
   }

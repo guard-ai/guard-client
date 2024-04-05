@@ -20,6 +20,7 @@ export default function TabLayout() {
     });
 
     const { user } = useContext(AuthContext);
+    
     if (!fontsLoaded && !fontError) {
         return null;
     }

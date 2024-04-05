@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import MapView from 'react-native-maps';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
 import * as Location from 'expo-location';
 import { Accuracy } from 'expo-location';
 import '../../global.css';
@@ -89,19 +89,23 @@ export default function MapPage() {
 
     useEffect(() => {
         userLocation();
-        const sendFirstNotification = async () => {
-            const testNotification: Notifications.NotificationContent = {
-                title: 'Test Notification',
-                subtitle: 'This is a test subtitle',
-                body: 'Here is the body of a notification',
-                sound: 'default',
-                data: null
-            }
-            console.log('sending test notification')
-            await sendPushNotification(user.user_metadata.expoPushToken, testNotification);
-        };
-        sendFirstNotification()
     }, []);
+
+    // SENDING NOTIFICATION EXAMPLE
+    // const sendFirstNotification = async () => {
+    //     const testNotification: Notifications.NotificationContent = {
+    //         title: 'Test Notification',
+    //         subtitle: 'This is a test subtitle',
+    //         body: 'Here is the body of a notification',
+    //         sound: 'default',
+    //         data: {}
+    //     };
+    //     console.log('sending test notification');
+    //     await sendPushNotification(
+    //         user.user_metadata.expoPushToken,
+    //         testNotification
+    //     );
+    // };
 
     if (!appIsReady && !fontsLoaded && !fontError) {
         return null;
@@ -114,6 +118,8 @@ export default function MapPage() {
                 region={mapRegion}
                 showsUserLocation
             ></MapView>
+
+            {/* <Pressable className='absolute top-1/2 left-1/2' onPress={() => sendFirstNotification()}><Text>Send test notification</Text></Pressable>  */}
 
             <BottomSheet
                 ref={sheetRef}
@@ -139,3 +145,118 @@ const styles = StyleSheet.create({
         height: '100%'
     }
 });
+// import React, { useState, useEffect, useRef } from 'react';
+// import { Text, View, Button, Platform } from 'react-native';
+// import * as Device from 'expo-device';
+// import * as Notifications from 'expo-notifications';
+// import Constants from 'expo-constants';
+
+
+// Notifications.setNotificationHandler({
+//   handleNotification: async () => ({
+//     shouldShowAlert: true,
+//     shouldPlaySound: false,
+//     shouldSetBadge: false,
+//   }),
+// });
+
+
+// // Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
+// async function sendPushNotification(expoPushToken: Notifications.ExpoPushToken) {
+//   const message = {
+//     to: expoPushToken,
+//     sound: 'default',
+//     title: 'Here is the title',
+//     body: 'And here is the body! Updated',
+//     data: { someData: 'goes here' },
+//   };
+
+//   console.log(message)
+//   console.log('here')
+
+//   await fetch('https://exp.host/--/api/v2/push/send', {
+//     method: 'POST',
+//     headers: {
+//       Accept: 'application/json',
+//       'Accept-encoding': 'gzip, deflate',
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(message),
+//   });
+// }
+
+// async function registerForPushNotificationsAsync() {
+//   let token;
+
+//   if (Platform.OS === 'android') {
+//     Notifications.setNotificationChannelAsync('default', {
+//       name: 'default',
+//       importance: Notifications.AndroidImportance.MAX,
+//       vibrationPattern: [0, 250, 250, 250],
+//       lightColor: '#FF231F7C',
+//     });
+//   }
+
+//   if (Device.isDevice) {
+//     const { status: existingStatus } = await Notifications.getPermissionsAsync();
+//     let finalStatus = existingStatus;
+//     if (existingStatus !== 'granted') {
+//       const { status } = await Notifications.requestPermissionsAsync();
+//       finalStatus = status;
+//     }
+//     if (finalStatus !== 'granted') {
+//       alert('Failed to get push token for push notification!');
+//       return;
+//     }
+//     token = await Notifications.getExpoPushTokenAsync({
+//       projectId: Constants.expoConfig?.extra?.eas.projectId,
+//     });
+//     console.log(token);
+//   } else {
+//     alert('Must use physical device for Push Notifications');
+//   }
+
+//   return token.data;
+// }
+
+// export default function App() {
+//   const [expoPushToken, setExpoPushToken] = useState(null);
+//   const [notification, setNotification] = useState<Notifications.Notification | null>(null);
+//   const notificationListener = useRef<Notifications.Subscription>();
+//   const responseListener = useRef<Notifications.Subscription>();
+
+//   useEffect(() => {
+//     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+//     // // notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+//     // //   setNotification(notification);
+//     // // });
+
+//     // responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+//     //   console.log(response);
+//     // });
+
+//     // return () => {
+//     // //   Notifications.removeNotificationSubscription(notificationListener.current as Notifications.Subscription);
+//     //   Notifications.removeNotificationSubscription(responseListener.current as Notifications.Subscription);
+//     // };
+//   }, []);
+
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}>
+//       <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+//         <Text className='font-bold text-2xl'>Sample Notification</Text>
+//         <Text>Title: {notification && notification.request.content.title} </Text>
+//         <Text>Body: {notification && notification.request.content.body}</Text>
+//         <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
+//       </View>
+//       <Button
+//         title="Press to Send Notification"
+//         onPress={async () => {
+//             if (expoPushToken)
+//                 await sendPushNotification(expoPushToken);
+//         }}
+//       />
+//     </View>
+//   );
+// }
