@@ -7,7 +7,8 @@ export const events: EventI[] = [
         category: 'CONFIRMED_THREAT',
         time: new Date(),
         description:
-            'Fire reported on 10th and 8th street, several residents trapped inside. Fire Department and EMS on site, additional backup requested'
+            'Fire reported on 10th and 8th street, several residents trapped inside. Fire Department and EMS on site, additional backup requested',
+        location: ''
     },
     {
         id: 2,
@@ -15,7 +16,8 @@ export const events: EventI[] = [
         category: 'CONFIRMED_INFO',
         time: new Date(new Date().getTime() - 1000 * 60 * 5),
         description:
-            'Stabbing reported at Publix. All units requesting backup, rolling RA to site. Suspect was reported leaving the area.'
+            'Stabbing reported at Publix. All units requesting backup, rolling RA to site. Suspect was reported leaving the area.',
+        location: ''
     },
     {
         id: 3,
@@ -23,7 +25,8 @@ export const events: EventI[] = [
         category: 'NONE',
         time: new Date(new Date().getTime() - 1000 * 60 * 32),
         description:
-            'Active units needed at Marta station on 5th and 6th. Active robbery reported near Marta bus station, rolling RA to the location. All units be advised.'
+            'Active units needed at Marta station on 5th and 6th. Active robbery reported near Marta bus station, rolling RA to the location. All units be advised.',
+        location: ''
     },
     {
         id: 4,
@@ -31,7 +34,8 @@ export const events: EventI[] = [
         category: 'NONE',
         time: new Date(new Date().getTime() - 1000 * 60 * 32),
         description:
-            'Active units needed at Marta station on 5th and 6th. Active robbery reported near Marta bus station, rolling RA to the location. All units be advised.'
+            'Active units needed at Marta station on 5th and 6th. Active robbery reported near Marta bus station, rolling RA to the location. All units be advised.',
+        location: ''
     },
     {
         id: 5,
@@ -39,7 +43,8 @@ export const events: EventI[] = [
         category: 'NONE',
         time: new Date(new Date().getTime() - 1000 * 60 * 32),
         description:
-            'Active units needed at Marta station on 5th and 6th. Active robbery reported near Marta bus station, rolling RA to the location. All units be advised.'
+            'Active units needed at Marta station on 5th and 6th. Active robbery reported near Marta bus station, rolling RA to the location. All units be advised.',
+        location: ''
     }
 ];
 

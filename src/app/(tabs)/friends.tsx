@@ -98,6 +98,7 @@ export default function FriendsPage() {
             <MapView
                 style={styles.map}
                 region={mapRegion}
+                mapType="hybrid"
                 showsUserLocation
             ></MapView>
 

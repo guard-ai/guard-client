@@ -97,6 +97,7 @@ export default function MapPage() {
             <MapView
                 style={styles.map}
                 region={mapRegion}
+                mapType="hybrid"
                 showsUserLocation
             ></MapView>
 

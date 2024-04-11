@@ -9,6 +9,40 @@ import {
     Oswald_600SemiBold,
     Oswald_700Bold
 } from '@expo-google-fonts/oswald';
+import { Circle } from 'react-native-maps';
+
+export function IncidentMarker(props: {
+    fillColor: string;
+    ringColor: string;
+    coords: {
+        lat: number;
+        long: number;
+    };
+}) {
+    return (
+        <>
+            <Circle
+                fillColor={props.fillColor}
+                radius={20}
+                center={{
+                    latitude: props.coords.lat,
+                    longitude: props.coords.long
+                }}
+            />
+
+            <Circle
+                strokeWidth={1}
+                strokeColor={props.fillColor}
+                fillColor={props.ringColor}
+                radius={300}
+                center={{
+                    latitude: props.coords.lat,
+                    longitude: props.coords.long
+                }}
+            />
+        </>
+    );
+}
 
 function Chip(props: {
     children: React.ReactElement;
@@ -50,6 +84,7 @@ export interface EventI {
         | 'NONE';
     time: Date;
     description: string;
+    location: string;
 }
 
 export interface FriendI {

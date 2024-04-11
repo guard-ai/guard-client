@@ -2,10 +2,10 @@ import { AppState } from 'react-native';
 import 'react-native-url-polyfill/auto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
-import { REACT_NATIVE_SUPABASE_KEY, REACT_NATIVE_SUPABASE_URL } from '@env';
+import { EXPO_PUBLIC_SUPABASE_KEY, EXPO_PUBLIC_SUPABASE_URL } from '@env';
 
-const supabaseUrl = REACT_NATIVE_SUPABASE_URL;
-const supabaseAnonKey = REACT_NATIVE_SUPABASE_KEY;
+const supabaseUrl = EXPO_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = EXPO_PUBLIC_SUPABASE_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     auth: {
@@ -34,5 +34,6 @@ export const getUser = async () => {
     if (data?.session?.user && !error) {
         return data.session.user;
     }
+    console.error(error);
     return null;
 };

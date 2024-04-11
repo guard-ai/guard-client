@@ -6,6 +6,7 @@ import AuthContext from './context';
 import { supabase } from '@/lib/supabase';
 import { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { router } from 'expo-router';
+import { StatusBar } from 'react-native';
 
 export default function Layout() {
     const [user, setUser] = useState(null);
@@ -20,13 +21,13 @@ export default function Layout() {
                     setUser(null);
                     router.replace('/signup');
                 }
-                console.log('changing auth state to', session);
             }
         );
     }, []);
 
     return (
         <AuthContext.Provider value={{ user, setUser }}>
+            <StatusBar backgroundColor="white" barStyle="dark-content" />
             <GestureHandlerRootView className="w-full h-full flex-1">
                 <Stack screenOptions={{ headerShown: false }}>
                     <Stack.Screen
