@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import MapView from 'react-native-maps';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import * as Location from 'expo-location';
 import { Accuracy } from 'expo-location';
 import '../../global.css';
-import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetFlatList, BottomSheetView } from '@gorhom/bottom-sheet';
 import { Event } from '@/components/map';
 import {
     useFonts,
@@ -35,7 +35,7 @@ export default function MapPage() {
         longitudeDelta: 0.0421
     });
     const sheetRef = useRef<BottomSheet>(null);
-    const snapPoints = useMemo(() => ['25%', '50%'], []);
+    const snapPoints = useMemo(() => ['10%'], []);
     const [appIsReady, setAppIsReady] = useState(false);
     // const onLayoutRootView = useCallback(async () => {
     //     if (appIsReady || fontsLoaded || fontError) {
@@ -106,14 +106,9 @@ export default function MapPage() {
                 snapPoints={snapPoints}
                 enableDynamicSizing
             >
-                <BottomSheetFlatList
-                    data={[]}
-                    renderItem={({ item }) => <Event event={item} />}
-                    ItemSeparatorComponent={() => (
-                        <View className="w-full h-[1px] bg-slate-200 my-3" />
-                    )}
-                    contentContainerClassName="px-2"
-                />
+                <BottomSheetView>
+                    <Text className='font-OswaldSemiBold m-auto w-full text-center'>Coming soon...</Text>
+                </BottomSheetView>
             </BottomSheet>
         </View>
     );

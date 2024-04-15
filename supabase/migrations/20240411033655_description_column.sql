@@ -1,2 +1,2 @@
 ALTER TABLE "public"."Events"
-ADD COLUMN description TEXT DEFAULT "";
+ADD COLUMN description TEXT DEFAULT '';

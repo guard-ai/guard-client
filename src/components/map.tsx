@@ -9,7 +9,7 @@ import {
     Oswald_600SemiBold,
     Oswald_700Bold
 } from '@expo-google-fonts/oswald';
-import { Circle } from 'react-native-maps';
+import { Circle, Marker } from 'react-native-maps';
 
 export function IncidentMarker(props: {
     fillColor: string;
@@ -18,30 +18,62 @@ export function IncidentMarker(props: {
         lat: number;
         long: number;
     };
+    onPress: () => void;
 }) {
     return (
         <>
-            <Circle
-                fillColor={props.fillColor}
-                radius={20}
-                center={{
+            <Marker
+                coordinate={{
                     latitude: props.coords.lat,
                     longitude: props.coords.long
                 }}
+                onPress={() => props.onPress()}
+                pinColor={props.fillColor}
             />
 
-            <Circle
-                strokeWidth={1}
-                strokeColor={props.fillColor}
-                fillColor={props.ringColor}
-                radius={300}
-                center={{
-                    latitude: props.coords.lat,
-                    longitude: props.coords.long
-                }}
-            />
+            <View>
+                <Circle
+                    fillColor={props.fillColor}
+                    radius={20}
+                    center={{
+                        latitude: props.coords.lat,
+                        longitude: props.coords.long
+                    }}
+                />
+
+                <Circle
+                    strokeWidth={1}
+                    strokeColor={props.fillColor}
+                    fillColor={props.ringColor}
+                    radius={300}
+                    center={{
+                        latitude: props.coords.lat,
+                        longitude: props.coords.long
+                    }}
+                />
+            </View>
         </>
     );
+}
+
+export const categoryColors = {
+    CONFIRMED_THREAT: {
+        fillColor: '#FA3232',
+        ringColor: 'rgba(255, 147, 147, .9)'
+    },
+    REPORTED_THREAT: {
+        ringColor: '#FA3232',
+        fillColor: 'rgba(255, 147, 147, .7)'
+    },
+    CONFIRMED_INFO: {
+        ringColor: '#FFEE93',
+        fillColor: '#FFEE93'
+    },
+    REPORTED_INFO: {
+        ringColor: '#FFEE93',
+        fillColor: 'rgba(255, 238, 147, .7)'
+    }
+
 }
 
 function Chip(props: {
@@ -173,6 +205,80 @@ export function Event(props: { event: EventI }) {
             <Text className="text-base pl-2 font-OswaldLight">
                 {props.event.description}
             </Text>
+        </View>
+    );
+}
+
+export function EventDetails(props: { event: EventI }) {
+    const [fonts, error] = useFonts({
+        Oswald_200ExtraLight,
+        Oswald_300Light,
+        Oswald_400Regular,
+        Oswald_500Medium,
+        Oswald_600SemiBold,
+        Oswald_700Bold
+    });
+    const time =
+        new Date().getTime() / 1000 - props.event.time.getTime() / 1000 <= 60
+            ? 'NOW'
+            : `${timeSince(props.event.time)} AGO`;
+    const label = props.event.category.includes('CONFIRMED')
+        ? 'CONFIRMED'
+        : 'REPORTED';
+
+    if (!fonts && !error) {
+        return null;
+    }
+
+    return (
+        <View className="w-full flex flex-col gap-2">
+            <View className="w-full flex flex-row flex-nowrap items-center justify-between gap-2">
+                <Chip category={props.event.category}>
+                    <Text
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
+                        className="text-base uppercase overflow-hidden font-OswaldSemiBold"
+                    >{`${label}: ${props.event.title}`}</Text>
+                </Chip>
+                <Text className="text-right text-sm uppercase font-OswaldLight">
+                    {time}
+                </Text>
+            </View>
+
+            <View className="pl-2">
+                <Text className="text-lg font-OswaldSemiBold">
+                    Approximate Location
+                </Text>
+                <Text className="text-lg font-OswaldLight">
+                    {props.event.location}
+                </Text>
+
+                <Text className="text-lg font-OswaldSemiBold">
+                    Date and Time
+                </Text>
+                <Text className="text-lg font-OswaldLight">
+                    {props.event.time.toLocaleString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    })}
+                    {', '}
+                    {props.event.time.toLocaleTimeString()}
+                </Text>
+
+                <Text className="text-lg font-OswaldSemiBold">
+                    Threat Level
+                </Text>
+                <Text className="text-lg font-OswaldLight">
+                    {props.event.category}
+                </Text>
+
+                <Text className="text-lg font-OswaldSemiBold">Description</Text>
+                <Text className="text-lg font-OswaldLight">
+                    {props.event.description}
+                </Text>
+            </View>
         </View>
     );
 }

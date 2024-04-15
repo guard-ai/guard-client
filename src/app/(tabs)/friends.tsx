@@ -36,7 +36,7 @@ export default function FriendsPage() {
         longitudeDelta: 0.0421
     });
     const sheetRef = useRef<BottomSheet>(null);
-    const snapPoints = useMemo(() => ['25%', '50%'], []);
+    const snapPoints = useMemo(() => [], []);
     const [appIsReady, setAppIsReady] = useState(false);
     // const onLayoutRootView = useCallback(async () => {
     //     if (appIsReady || fontsLoaded || fontError) {
