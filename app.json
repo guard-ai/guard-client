@@ -3,11 +3,23 @@
     "scheme": "acme",
     "userInterfaceStyle": "automatic",
     "orientation": "default",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+
+
     "web": {
       "output": "static",
       "bundler": "metro"
     },
     "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptiveIcon.png" ,
+        "backgroundColor": "#ffffff"
+      },
       "package": "com.guard.app",
       "googleServicesFile": "./google-services.json"
     },
