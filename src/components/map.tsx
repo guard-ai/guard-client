@@ -30,7 +30,6 @@ export function IncidentMarker(props: {
                 onPress={() => props.onPress()}
                 pinColor={props.fillColor}
             />
-
             <View>
                 <Circle
                     fillColor={props.fillColor}
@@ -43,8 +42,8 @@ export function IncidentMarker(props: {
 
                 <Circle
                     strokeWidth={1}
-                    strokeColor={props.fillColor}
-                    fillColor={props.ringColor}
+                    strokeColor={props.ringColor}
+                    fillColor={props.fillColor}
                     radius={300}
                     center={{
                         latitude: props.coords.lat,
@@ -67,14 +66,13 @@ export const categoryColors = {
     },
     CONFIRMED_INFO: {
         ringColor: '#FFEE93',
-        fillColor: '#FFEE93'
+        fillColor: 'rgba(255, 238, 147, .7)'
     },
     REPORTED_INFO: {
         ringColor: '#FFEE93',
         fillColor: 'rgba(255, 238, 147, .7)'
     }
-
-}
+};
 
 function Chip(props: {
     children: React.ReactElement;

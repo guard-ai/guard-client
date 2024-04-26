@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import MapView from 'react-native-maps';
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location';
 import { Accuracy } from 'expo-location';
 import '../../global.css';
@@ -26,10 +26,7 @@ import {
 } from '@expo-google-fonts/oswald';
 import { SplashScreen } from 'expo-router';
 import { getUser } from '@/lib/supabase';
-import {
-    RUN_MODE,
-    EXPO_PUBLIC_GUARD_ASGARD_SERVER
-} from '@env';
+import { RUN_MODE, EXPO_PUBLIC_GUARD_ASGARD_SERVER } from '@env';
 import { BackArrowIcon } from '@/components/icons';
 import { events as dummyEvents } from '@/lib/data';
 
@@ -52,7 +49,7 @@ export default function MapPage() {
     });
     const sheetRef = useRef<BottomSheet>(null);
     const mapRef = useRef<MapView>(null);
-    const snapPoints = useMemo(() => ['10%', '25%'], []);
+    const snapPoints = useMemo(() => ['25%', '50%'], []);
     const [appIsReady, setAppIsReady] = useState(false);
     const [events, setEvents] = useState<EventI[]>([]);
     const [currentEvent, setCurrentEvent] = useState<EventI>(null);
@@ -103,7 +100,6 @@ export default function MapPage() {
         }
 
         if (RUN_MODE == 'MANUAL') {
-            console.log('here dummy events')
             setEvents(dummyEvents);
             return;
         }

@@ -34,8 +34,8 @@ export default function SignUp() {
             },
             body: JSON.stringify({
                 id,
-                // location: `${location.coords.latitude},${location.coords.longitude}`,
-                location: '39.705781336390864,-104.82072755523521',
+                location: `${location.coords.latitude},${location.coords.longitude}`,
+                // location: '39.705781336390864,-104.82072755523521',
                 push_token: expoPushToken
             })
         }).catch((e) => console.error(e));
